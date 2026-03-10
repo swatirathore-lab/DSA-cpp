@@ -1,34 +1,33 @@
-// #include <iostream>
-// using namespace std;
-// int main() {
-//     int n ;
-//     cout << "input a number" << endl;
-//     cin >> n ;
-//     if (n == 0) {
-//         cout << "the number is zero" << endl;
-//     } else if (n > 0) {
-//         cout << "the number is positive" << endl;
-//     } else {
-//         cout << "the number is negative" << endl;
-//     }
-
-// }
-// #include <iostream>
-// using namespace std;
-// int main() {
-//     int year;
-//     cout << "enter a year " << endl;
-//     cin >> year ;
-//     if (year % 4  == 0 &&( year % 400 == 0 || year % 100 != 0)) {
-//         cout << "the year is leap year" << endl ;
-//     } else {
-//         cout << "the year is not a leap year" << endl ;
-//     }       
-// }
 #include <iostream>
 #include <cmath>
 using namespace std;
-int main () {
+void checknumber() {
+    int n ;
+    cout << "input a number" << endl;
+    cin >> n ;
+    if (n == 0) {
+        cout << "the number is zero" << endl;
+    } else if (n > 0) {
+        cout << "the number is positive" << endl;
+    } else {
+        cout << "the number is negative" << endl;
+    }
+
+}
+
+void checkleapyear() {
+    int year;
+    cout << "enter a year " << endl;
+    cin >> year ;
+    if (year % 4  == 0 &&( year % 400 == 0 || year % 100 != 0)) {
+        cout << "the year is leap year" << endl ;
+    } else {
+        cout << "the year is not a leap year" << endl ;
+    }       
+}
+
+
+void checkarmstrongnumber() {
     int a,count=0,num,i,sum,digit;
     cout << " enter a number " << endl ;
     cin >> a ;
@@ -50,6 +49,11 @@ int main () {
     } else {
         cout <<"the no. is not armstrong number"<< endl;    
     }
-    return 0;
     
+}
+int main() {
+    checknumber();
+    checkleapyear();
+    checkarmstrongnumber();
+    return 0;
 }

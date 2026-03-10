@@ -75,11 +75,10 @@ int main()
     {
         cout<<n<<" is not a palindrome number.";
     }
-    cout<<"The sum of digit of "<<p<< "is"<<sumofdigits(p);
-    cout<<"The value of the function is: "<<function(a,b);
-    cout<<"The gretaest number is"<<largestof3(x,y,z);
-    cout<<"The next character is: "<<getnextchar(ch);
-    cout<<endl;
+    cout<<"The sum of digit of "<<p<< "is"<<sumofdigits(p)<<endl;
+    cout<<"The value of the function is: "<<function(a,b)<<endl;
+    cout<<"The gretaest number is"<<largestof3(x,y,z)<<endl;
+    cout<<"The next character is: "<<getnextchar(ch)<<endl;
     return 0;
 }
 

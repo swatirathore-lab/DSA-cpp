@@ -27,6 +27,7 @@ int linearSearch(int *arr, int n, int key) {
     
     
 }
+//reverseinarray
 
 void reverseinarrayusingspace(int arr[], int n) {
     int copyarr[n];

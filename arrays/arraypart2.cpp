@@ -74,6 +74,32 @@ void maxprofit( int *prices,int n) {
     cout<<maxprofit<<endl;
     
 }
+void trappingrainwater( int *heights,int n) {
+    int leftmax[1000];
+    int rightmax[1000];
+    leftmax[0]=heights[0];
+    rightmax[n-1]=heights[n-1];//as maths and c++ calculation works differently
+    for(int i=1;i<n;i++){
+        leftmax[i]=max(leftmax[i-1],heights[i-1]);
+        cout<<leftmax[i]<<",";//for just leftmax adresses will come so use [i]
+
+    }
+    for(int i=n-2;i>=0;i--){//you can forgrt to play reverse loop
+        rightmax[i]=max(rightmax[i+1],heights[i+1]);//+ sign do have logic
+        cout<<rightmax[i]<<",";
+
+    }
+    int  watertrapped=0;
+    for(int i=0;i<n;i++){
+        int currwater=min(leftmax[i],rightmax[i])-heights[i];
+        if(currwater>0){//as if negative it would be zero
+            watertrapped=watertrapped+currwater;
+        }
+    }
+    cout<<"water trapped = "<<watertrapped<<endl;
+
+
+}
 
 
 
@@ -97,6 +123,10 @@ int main(){
     int prices[6]={7,1,5,3,6,4};
     int n2=sizeof(prices)/sizeof(int);
     maxprofit( prices, n2);
+    //trapping of rainwater
+    int heights[7]={4,2,0,6,3,2,5};
+    int n3=sizeof(heights)/sizeof(int);
+    trappingrainwater(heights,n3);
 
     return 0;
 }

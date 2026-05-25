@@ -10,7 +10,7 @@ void countlowercase(char word[],int n) {
     }
     cout<<"Number of lowercase letters: "<<count<<endl;
 }
-//Question2:Youaregiventwostringss1ands2ofequallength.Astringswapisanoperationwhereyouchoosetwoindicesinastring(notnecessarilydifferent)andswapthecharactersattheseindices.Returntrueifitispossibletomakebothstringsequalbyperformingatmostonestringswaponexactlyoneofthestrings.Otherwise,returnfalse.Example:Input:s1="bank",s2="kanb"Output:trueExplanation:Forexample,swapthefirstcharacterwiththelastcharacterofs2tomake"bank".
+//Question2:You are giventwostringss1ands2ofequallength.Astringswapisanoperationwhereyouchoosetwoindicesinastring(notnecessarilydifferent)andswapthecharactersattheseindices.Returntrueifitispossibletomakebothstringsequalbyperformingatmostonestringswaponexactlyoneofthestrings.Otherwise,returnfalse.Example:Input:s1="bank",s2="kanb"Output:trueExplanation:Forexample,swapthefirstcharacterwiththelastcharacterofs2tomake"bank".
 bool arrcheckswap(string string1,string string2){
     int i;
     int diff=0;

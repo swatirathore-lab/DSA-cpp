@@ -256,7 +256,7 @@ class C : public B {
         cout<<"Class C"<<endl;
     }
 };
-//multtiple inheritance is a type of inheritance where a class can inherit
+//multtiple inheritance is a type of inheritance where a class can inherit 
 class teacher{
     public:
     int salary;

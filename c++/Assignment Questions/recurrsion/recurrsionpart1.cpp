@@ -55,6 +55,31 @@ int firstoccur(vector<int> arr,int i,int target){//because vector so no need to 
     return firstoccur(arr,i+1,target);
     
 }
+//last occurence
+int lastoccur(vector<int>arr, int target,int i) {
+    if(i== arr.size()){
+        return -1;
+    }
+    int idxfound = lastoccur(arr,target,i+1);
+    if(idxfound==-1 && arr[i]== target){
+        return i;
+    }
+    return idxfound;
+}
+//print x to the power n
+int pow(int x,int n){
+    if(n==0){
+        return 1;
+    }
+    int halfpower=pow(x,n/2);
+    int halfpowersquare =halfpower*halfpower;
+    if(n%2!=0){
+        //odd
+        return x*halfpowersquare;
+    }
+    return halfpowersquare;
+}
+
 
 
 int main() {
@@ -73,5 +98,7 @@ int main() {
     cout<<"arr1 is sorted or not "<< issorted(arr1,5,0)<<endl;
     vector<int> arr3={1,2,3,3,3,4};
     cout<<firstoccur(arr3,0,3)<<endl;
+    cout<<lastoccur(arr3,4,0)<<endl;
+    cout<<pow(5,3)<<endl;
     return 0;
 }

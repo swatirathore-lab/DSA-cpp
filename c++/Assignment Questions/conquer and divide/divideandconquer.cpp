@@ -6,7 +6,7 @@ void merge(int arr[], int si,int mid,int ei){//time complexity O(n) and space co
     vector<int> temp;//temporary array
     int i=si;//iterator for left half
     int j=mid+1;//iterator for right half
-    int k=0;//iterator for temp array
+    
 
     while(i<=mid && j<=ei){
         if(arr[i]<arr[j]){

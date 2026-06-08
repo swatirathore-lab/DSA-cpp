@@ -45,7 +45,7 @@ void printarr(int arr[], int n){
     }
     cout<<endl;
 }
-//quick sort
+//quick sort and timecomplexity O(nlogn) and space complexity O(logn)
 int partition(int arr[], int si,int ei){
     int pivot=arr[ei];//choosing last element as pivot
     int i=si-1;//index of smaller element
@@ -68,6 +68,35 @@ void quicksort(int arr[], int si,int ei){
     quicksort(arr,si,pivotindex-1);//left half
     quicksort(arr,pivotindex+1,ei);//right half
 }
+//rotated sorted array
+int search(int arr [],int si ,int ei,int target){//time complexity O(logn) and space complexity O(1)    
+    //base case
+    if(si>ei){
+        return -1;
+    }
+    int mid=(si+ei)/2;
+    if(arr[mid]==target){
+        return mid;
+    }
+    //left half is sorted
+    if(arr[si]<=arr[mid]){
+        if(target>=arr[si] && target<=arr[mid]){
+            return search(arr,si,mid-1,target);
+        }
+        else{
+            return search(arr,mid+1,ei,target);
+        }
+    }
+    //right half is sorted
+    else{
+        if(target>=arr[mid] && target<=arr[ei]){
+            return search(arr,mid+1,ei,target);
+        }
+        else{
+            return search(arr,si,mid-1,target);
+        }
+    }
+}   
 
 int main() {
     int arr[6] ={6,3,7,5,2,4};
@@ -76,5 +105,14 @@ int main() {
     printarr(arr, n);
     quicksort(arr,0,n-1);
     printarr(arr, n);
+    int arr2[7]={4,5,6,7,0,1,2};
+    int target=0;
+    int index=search(arr2,0,6,target);
+    if(index!=-1){
+        cout<<"Element found at index: "<<index<<endl;
+    }
+    else{
+        cout<<"Element not found"<<endl;
+    }
     return 0;
 }

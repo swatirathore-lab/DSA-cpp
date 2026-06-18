@@ -46,17 +46,87 @@ void permutations(string str,string ans) {
     }
 
 }
+//N queens
+void printBoard(vector<vector<char>>board){
+    int n=board.size();
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cout<<board[i][j];
+        }
+        cout<<endl;
+    }
+    cout<<"--------------------"<<"\n";
+}
+bool issafe(vector<vector<char>> board,int row,int col){
+    int n=board.size();
+    for(int j=0;j<col;j++){
+        if(board[row][j]=='Q'){
+            return false;
+        }
+    }
+   
+    for(int i=0;i<row;i++){
+        if(board[i][col]=='Q'){
+            return false;
+        }
+    }
+    for(int i=row,j=col;i>=0 && j>=0;i--,j--){
+        if(board[i][j]=='Q'){
+            return false;
+        }
+    }
+    for(int i=row,j=col;i>=0 && j<n;i--,j++){
+        if(board[i][j]=='Q'){
+            return false;
+        }
+    }
+    return true;
+
+}
+int nQueens(vector<vector<char>> board,int row){//add void->int for count
+    int n=board.size();
+    if(row==n){
+        printBoard(board);
+        return 1;
+    }
+    int count=0;//for count
+    for(int j=0;j<n;j++){
+        if(issafe(board,row,j)){
+            board[row][j]='Q';
+            count += nQueens(board,row+1);//for count
+            board[row][j]='.';
+        }
+    }
+    return count;//for count
+}
+
+
+
 
 int main() {
+    //backtracking on array
     int arr[5]={0};
     int n=5;
     changeArr(arr,n,0);
     printArr(arr,n);
+    //find subsets
     string str="abc";
     substring(str,"");
+    //find permutations
     string str1="abc";
     string ans="";
     permutations(str1,ans);
+    //N queens
+    vector<vector<char>>board;
+    int n4=4;
+    for(int i=0;i<n4;i++){
+        vector<char> newRow;
+        for(int j=0;j<n4;j++){
+            newRow.push_back('.');
+        }
+        board.push_back(newRow);
+    }
+    int count=nQueens(board,0);//for count
+    cout<<count<<endl;//for count
     return 0;
-
 }

@@ -99,6 +99,83 @@ int nQueens(vector<vector<char>> board,int row){//add void->int for count
     }
     return count;//for count
 }
+//Grid Ways
+int gridways(int r,int c,int n,int m,string ans){
+    if(r==n-1 && c==n-1){//Bc
+        cout<<ans<<"\n";
+        return 1;
+    }
+    if(r>=n || c>=n){
+        return 0;
+    }
+    //right
+    int v1=gridways(r,c+1,n,m,ans+"R");
+    //down
+    int v2=gridways(r+1,c,n,m,ans+"D");
+    return v1+v2;
+}
+//sudoku solver
+void printsudoku(int sudoku[9][9]){
+    for(int i=0;i<=8;i++){
+        for(int j=0;j<=8;j++){
+            cout<<sudoku[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    cout<<"\n";
+}
+bool issafee(int sudoku[9][9],int dig,int row,int col){
+    //vertical
+    for(int i=0;i<=8;i++){
+        if(sudoku[i][col]==dig){
+            return false;
+        }
+    }
+    //horizontal
+    for (int j=0;j<=8;j++){
+        if(sudoku[row][j]==dig){
+            return false;
+        }
+    }
+    //grid 
+    int strrow=(row/3)*3;
+    int strcol=(col/3)*3;
+    for(int i=strrow;i<=strrow+2;i++){
+        for(int j=strcol;j<=strcol+2;j++){
+            if(sudoku[i][j]==dig){
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+bool sudokusolver(int sudoku[9][9],int row,int col){
+    if(row==9){
+        printsudoku(sudoku);
+        return true;
+    }
+    int newrow=row;
+    int newcol=col+1;
+    if(newcol==9){
+        newrow=row+1;
+        newcol=0;
+    }
+    if(sudoku[row][col]!=0){
+        return sudokusolver(sudoku,newrow,newcol);
+    }
+    for(int dig=1;dig<=9;dig++){
+        if(issafee(sudoku,dig,row,col)){
+            sudoku[row][col]=dig;
+            if(sudokusolver(sudoku,newrow,newcol)){//backtrack karke true dega agar value sahi hai
+                return true;
+            }
+            sudoku[row][col]=0;
+        }
+    }
+    
+    return false;//pura complete ho gya still false value
+}
 
 
 
@@ -128,5 +205,21 @@ int main() {
     }
     int count=nQueens(board,0);//for count
     cout<<count<<endl;//for count
+    int n5=3;
+    int m5=3;
+    string ans1="";
+    cout<<gridways(0,0,n5,m5,ans1);
+    //sudoku solver
+    int sudoku[9][9] = {{0, 0, 0, 0, 0, 8, 0, 0, 5},
+                     {3, 0, 6, 9, 0, 0, 8, 0, 0},
+                     {0, 0, 1, 5, 0, 0, 0, 0, 9},
+                     {5, 1, 0, 7, 0, 3, 4, 0, 6},
+                     {0, 0, 4, 0, 0, 0, 1, 0, 0},
+                     {0, 0, 0, 1, 0, 4, 2, 0, 0},
+                     {0, 6, 0, 4, 1, 0, 0, 8, 0},
+                     {4, 2, 5, 0, 0, 0, 0, 0, 1},
+                     {1, 0, 8, 0, 0, 0, 0, 0, 0}};
+    bool solved = sudokusolver(sudoku,0,0);
+    cout << "Solved: " << solved << endl;               
     return 0;
 }

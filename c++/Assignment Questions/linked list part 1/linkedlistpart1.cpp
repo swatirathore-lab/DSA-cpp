@@ -144,7 +144,7 @@ public:
         }
         return sz;
     }
-    void removenth(int n){
+    void removenth(int n){//o(n);o(1)
         int size=getsize();
         node* prev =head;
         for(int i=1;i<(size-n);i++){//i=size-n=>prev=>deletion node prev
@@ -155,14 +155,32 @@ public:
         prev->next=prev->next->next;
 
     }
+    bool isPalinHelper(node*& back, node* front) {
+        if(front==NULL){
+            return true;
+        }
+        bool smallpalindrom=isPalinHelper(back,front->next);
+        bool currentpalindrom=(front->data==back->data);
+        back=back->next;
+        return smallpalindrom && currentpalindrom;
+    // front: the pointer that recurses deep first (goes node1 -> node2 -> ... -> NULL)
+    // back:  passed BY REFERENCE so all recursive calls share and update the SAME variable,
+    //        starts at head, only moves forward AFTER a recursive call returns
+    }
+
+    bool isPalindrome() {
+        node* back = head;
+        return isPalinHelper(back, head);
+    }
 
 };
 
 
 
+
 int main() {
     list ll;
-    ll.push_front(3);
+    ll.push_front(1);
     ll.push_front(2);
     ll.push_front(1);
     //1->2->3->null
@@ -174,8 +192,9 @@ int main() {
     // cout<<ll.searchrec(4)<<endl;
     // ll.reverse();
     // ll.printlist();
-    ll.removenth(2);
-    ll.printlist();
+    // ll.removenth(2);
+    // ll.printlist();
+    cout<<ll.isPalindrome();
     return 0;
 
 }

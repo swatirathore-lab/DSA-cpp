@@ -51,7 +51,7 @@ public:
         return vec[lastidx];
     }
     bool isEmpty() {
-        return vec.empty();
+        return vec.empty()==0;
     }
 };
 int main() {

@@ -2,6 +2,7 @@
 #include <vector>
 #include <list>
 #include <string>
+#include <stack>
 
 using namespace std;
 //create stack using linked list
@@ -50,11 +51,11 @@ public:
 
 
 int main() {
-    Stack<int> s;
+    stack<int> s;
     s.push(1);
     s.push(2);
     s.push(3);
-    while(!s.isEmpty()) {
+    while(!s.empty()) {
         cout << s.top() << " ";
         s.pop();
     }

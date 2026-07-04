@@ -79,9 +79,6 @@ int pow(int x,int n){
     }
     return halfpowersquare;
 }
-
-
-
 int main() {
     int num = 5;
     cout << "Factorial of " << num << " is " << factorial(num) << endl;

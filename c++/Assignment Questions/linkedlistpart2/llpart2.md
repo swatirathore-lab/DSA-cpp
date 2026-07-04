@@ -18,9 +18,13 @@ struct Node {
     int data;
     Node* next;  // arrow pointing to the next node
 };
+
 ```
 
 So `curr->next` literally means **"follow the arrow from curr, and grab the next field inside that node"**.
+
+
+
 
 ---
 
@@ -32,6 +36,8 @@ Here's the dangerous situation. Right now:
 prev=NULL   curr        
             ↓
 NULL ←←  [1] → [2] → [3] → [4] → NULL
+
+
 ```
 
 You want to **flip the arrow** of `curr` so it points back to `prev`:
@@ -42,11 +48,13 @@ curr->next = prev;  // [1]'s arrow now points to NULL
 
 But the moment you do that — **you've destroyed your only bridge to [2]!**
 
+
 ```
 NULL ← [1]    [2] → [3] → [4] → NULL
               ↑
          LOST FOREVER 💀
 ```
+
 
 That's exactly why `next = curr->next` comes **before** you flip anything. It **saves the bridge** first.
 
@@ -84,7 +92,6 @@ NULL    [1] → [2] → [3] → [4] → NULL
 ```
 "Go to curr ([1]), 
  overwrite its next field with prev (which is NULL)"
-
 NULL ← [1]    [2] → [3] → [4] → NULL
         curr  next
 ```

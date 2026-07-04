@@ -176,9 +176,6 @@ public:
 
 };
 
-
-
-
 int main() {
     list ll;
     ll.push_front(1);

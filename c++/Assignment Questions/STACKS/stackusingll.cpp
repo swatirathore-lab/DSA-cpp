@@ -48,7 +48,7 @@ public:
         return topNode == nullptr;
     }
 };    
-void nextgreater(vector<int>& arr, vector<int>& ans){
+void nextgreater(vector<int>& arr, vector<int>& ans){//o(n) time and o(n) space
     stack<int> s;
     int idx=arr.size()-1;
     ans[idx]=-1;
@@ -82,7 +82,7 @@ void nextgreater(vector<int>& arr, vector<int>& ans){
 // Examples:
 // [(])  → invalid
 // [()]  → valid
-void validparenthesis(string s){
+void validparenthesis(string s){//o(n) time and o(n) space
     stack<char> st;
     for(int i=0;i<s.length();i++){
         if(s[i]=='(' || s[i]=='{' || s[i]=='['){
@@ -110,6 +110,41 @@ void validparenthesis(string s){
         cout<<"Invalid"<<endl;
     }
 }   
+// Duplicate Parentheses
+
+// Given a balanced expression that can contain opening and closing parenthesis, check if it contains any duplicate parenthesis or not.
+
+// Input:  ((x+y))+z
+// Output: true
+// Explanation: Duplicate () found in subexpression ((x+y))
+
+// Input:  (x+y)
+// Output: false
+// Explanation: No duplicate () is found
+
+// Input:  ((x+y)+((z)))
+// Output: true
+// Explanation: Duplicate () found in subexpression ((z))
+bool duplicateparenthesis(string s){
+    stack<char> st;
+    for(int i=0;i<s.length();i++){
+        int ch=s[i];
+        if(ch!=')'){
+            st.push(ch);
+        }else{
+            if(st.top()=='('){
+                cout<<"Duplicate Parenthesis Found"<<endl;
+                return true;
+            }
+            while(st.top()!='('){
+                st.pop();
+            }
+            st.pop();
+        }
+
+    }
+    return false;
+}
 
 
 int main() {
@@ -127,5 +162,7 @@ int main() {
     nextgreater(arr, ans);
     validparenthesis("[(])");
     validparenthesis("[()]");
+    duplicateparenthesis("((x+y))+z");  
+    duplicateparenthesis("(x+y)");
     return 0;
 }

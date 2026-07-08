@@ -125,7 +125,7 @@ void validparenthesis(string s){//o(n) time and o(n) space
 // Input:  ((x+y)+((z)))
 // Output: true
 // Explanation: Duplicate () found in subexpression ((z))
-bool duplicateparenthesis(string s){
+bool duplicateparenthesis(string s){//o(n) time and o(n) space
     stack<char> st;
     for(int i=0;i<s.length();i++){
         int ch=s[i];
@@ -144,6 +144,62 @@ bool duplicateparenthesis(string s){
 
     }
     return false;
+}
+void print(vector<int> v){
+    for(int i=0;i<v.size();i++){
+        cout<<v[i]<<" ";
+    }
+    cout<<endl;
+}
+int maxgreaterareahistogram(vector<int> height){
+    int n=height.size();
+    vector<int> nsl(n);
+    vector<int> nsr(n);
+    stack<int> s;
+    //next smaller left
+    nsl[0]=-1;
+    s.push(0);
+    for(int i=0;i<height.size();i++){
+        int current=height[i];
+        while(!s.empty() && height[s.top()]>=current){
+            s.pop();
+        }
+        if(s.empty()){
+            nsl[i]=-1;
+        }else{
+            nsl[i]=s.top();
+        }
+        s.push(i);//push current index to stack because we need to find next smaller left for next elements
+    }
+    print(nsl);
+    while(!s.empty()){
+        s.pop();
+    }//wapas se stack ko empty kar diya kyuki we need to find next smaller right
+    //next smaller right
+    
+    nsr[n-1]=n;
+    s.push(n-1);
+    for(int i=n-2;i>=0;i--){
+        int current=height[i];
+        while(!s.empty() && height[s.top()]>=current){
+            s.pop();
+        }
+        if(s.empty()){
+            nsr[i]=n;
+        }else{
+            nsr[i]=s.top();
+        }
+        s.push(i);
+    }
+
+    int maxarea=0;
+    for(int i=0;i<n;i++){
+        int ht=height[i];
+        int width=nsr[i]-nsl[i]-1;
+        int area=ht*width;
+        maxarea=max(maxarea,area);
+    }
+    cout<<"Max Area in Histogram: "<<maxarea<<endl;
 }
 
 
@@ -164,5 +220,6 @@ int main() {
     validparenthesis("[()]");
     duplicateparenthesis("((x+y))+z");  
     duplicateparenthesis("(x+y)");
+    maxgreaterareahistogram({2,1,5,6,2,3});
     return 0;
 }

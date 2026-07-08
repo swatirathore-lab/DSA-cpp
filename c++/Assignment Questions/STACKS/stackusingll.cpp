@@ -70,6 +70,46 @@ void nextgreater(vector<int>& arr, vector<int>& ans){
         cout<<ans[i]<<" ";
     }
 }
+//Valid Parenthesis
+
+// Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+// An input string is valid if:
+// 1. Open brackets must be closed by the same type of brackets.
+// 2. Open brackets must be closed in the correct order.
+// 3. Every close bracket has a corresponding open bracket of the same type.
+
+// Examples:
+// [(])  → invalid
+// [()]  → valid
+void validparenthesis(string s){
+    stack<char> st;
+    for(int i=0;i<s.length();i++){
+        if(s[i]=='(' || s[i]=='{' || s[i]=='['){
+            st.push(s[i]);
+        }
+        else{
+            if(st.empty()){
+                cout<<"Invalid"<<endl;
+                return;
+            }
+            char top=st.top();
+            if((s[i]==')' && top=='(') || (s[i]=='}' && top=='{') || (s[i]==']' && top=='[')){
+                st.pop();
+            }
+            else{
+                cout<<"Invalid"<<endl;
+                return;
+            }
+        }
+    }
+    if(st.empty()){
+        cout<<"Valid"<<endl;
+    }
+    else{
+        cout<<"Invalid"<<endl;
+    }
+}   
 
 
 int main() {
@@ -85,5 +125,7 @@ int main() {
     vector<int> arr ={6,8,0,1,3};
     vector<int> ans ={0,0,0,0,0};
     nextgreater(arr, ans);
+    validparenthesis("[(])");
+    validparenthesis("[()]");
     return 0;
 }

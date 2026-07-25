@@ -43,6 +43,14 @@ public:
             return T();
         }
         return topNode->data;
+        //push(10):
+        // topNode -> [10] -> nullptr
+
+        // push(20):
+        // topNode -> [20] -> [10] -> nullptr
+
+        // push(30):
+        // topNode -> [30] -> [20] -> [10] -> nullptr
     }
     bool isEmpty() {
         return topNode == nullptr;

@@ -42,7 +42,7 @@ public:
         }   
         vec.pop_back();
     }
-    T top() {
+    int top() {
         if (isEmpty()) {
             cout << "Stack is empty" << endl;
             return -1;

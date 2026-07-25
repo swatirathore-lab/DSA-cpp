@@ -14,7 +14,7 @@
 
 ### Why right to left?
 - We need "next greater to the right" — so by processing right to left, 
-  everything already in the stack represents valid future candidates 
+  everything already in the stack represents valid future candidates
   for the current element
 
 ### Time complexity

@@ -12,6 +12,19 @@ void pushatbottom(stack<int> &s, int data) {
     pushatbottom(s, data);
     s.push(topval);
 }
+// Stack (top→bottom): 3 2 1, insert 0
+
+// pushatbottom(s, 0):
+//   topval = 3, pop → stack: 2 1
+//   pushatbottom(s, 0):
+//     topval = 2, pop → stack: 1
+//     pushatbottom(s, 0):
+//       topval = 1, pop → stack: (empty)
+//       pushatbottom(s, 0):
+//         stack empty → push(0) → stack: 0
+//       push(1) → stack: 1 0
+//     push(2) → stack: 2 1 0
+//   push(3) → stack: 3 2 1 0
 string reversestring(string str){//O(n)//o(n)
     stack<char> s;
     for(int i=0; i<str.length(); i++) {
@@ -26,6 +39,32 @@ string reversestring(string str){//O(n)//o(n)
     }
     return ans;
 }
+// Iteration 1:
+//   ch = s.top() → 'o'
+//   ans.push_back('o')  → ans = "o"
+//   s.pop()  → stack: l l e h
+
+// Iteration 2:
+//   ch = s.top() → 'l'
+//   ans.push_back('l')  → ans = "ol"
+//   s.pop()  → stack: l e h
+
+// Iteration 3:
+//   ch = s.top() → 'l'
+//   ans.push_back('l')  → ans = "oll"
+//   s.pop()  → stack: e h
+
+// Iteration 4:
+//   ch = s.top() → 'e'
+//   ans.push_back('e')  → ans = "olle"
+//   s.pop()  → stack: h
+
+// Iteration 5:
+//   ch = s.top() → 'h'
+//   ans.push_back('h')  → ans = "olleh"
+//   s.pop()  → stack: (empty)
+
+// Loop ends (s.empty() == true)
 void reverseStack(stack<int> &s) {
     if(s.empty()) {
         return;
@@ -48,7 +87,7 @@ void stockspanproblem(vector<int> &stock, vector<int> &span) {
             span[i] = i+1;
         } else {
             int prevhigh = s.top();
-            span[i] = i - prevhigh;
+            span[i] = i - prevhigh; 
         }
         s.push(i);
     }

@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+//implementation of queue using linked list
 class node {
     public:
     int data;

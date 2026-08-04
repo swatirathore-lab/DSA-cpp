@@ -88,3 +88,33 @@ bool containsDuplicate(vector<int>& nums) {
 
 **Interview mein preferred:** Hashing (best time complexity trade-off).
 ```
+-------------------------------------------------------------
+question 3rd time limit exceeded thing
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int n=nums.size();
+       
+        int maxproduct=INT_MIN;
+        for(int start=0;start<n;start++){//outer indices
+            for(int end=start;end<n;end++){////connecting those each indices with pthers
+                int product=1;
+                for(int i=start;i<=end;i++){//for calculating the product
+                    product=product*nums[i];
+                    maxproduct=max(maxproduct,product);
+
+                }
+            }
+        }
+        return maxproduct;
+        
+    }
+};
+
+
+
+
+
+
+
+

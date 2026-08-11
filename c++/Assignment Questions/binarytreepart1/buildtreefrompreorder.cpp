@@ -64,6 +64,8 @@ void levelorder(node* root){
     while(!q.empty()){
         node* curr=q.front();
         q.pop();
+        // BUG: nothing ever prints curr->data here!
+        cout << curr->data << " ";
         if(curr->left!=NULL){
             q.push(curr->left);
         }
@@ -86,6 +88,7 @@ void levelorder1(node* root){
     while(!q.empty()){
         node* curr=q.front();
         q.pop();
+        
         if(curr==NULL){
             cout<<endl;//agar curr null hai to endl charcatwrr daal do
             //agar null character nikalneke baad queue khali ho gayi
@@ -95,6 +98,8 @@ void levelorder1(node* root){
             q.push(NULL);//to track next line
         }
         else{
+            // BUG: nothing ever prints curr->data here!
+            cout << curr->data << " ";
             if(curr->left!=NULL){
                 q.push(curr->left);
             }
@@ -109,6 +114,33 @@ void levelorder1(node* root){
     }
     
 }
+int height(node* root){
+    if(root==NULL){
+        return 0;
+    }
+    int leftht=height(root->left);
+    int rightht=height(root->right);
+    int currht=max(leftht,rightht)+1;
+    return currht;
+}
+int count(node* root){
+    if(root==NULL){
+        return 0;
+    }
+    int countlt=count(root->left);
+    int countrt=count(root->right);
+    return countlt+countrt+1;
+
+}
+int sum(node* root){
+    if(root==NULL){
+        return 0;
+    }
+    int sumleft=sum(root->left);
+    int sumright=sum(root->right);
+    return sumleft+sumright+root->data;
+
+}
 int main(){
     vector<int> nodes={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     node* root=build(nodes);
@@ -120,6 +152,14 @@ int main(){
     postorder(root);
     cout<<endl;
     levelorder(root);
+    cout<<endl;
+    levelorder1(root);
+    cout<<endl;
+    cout<<height(root);
+    cout<<endl;
+    cout<<count(root);
+    cout<<endl;
+    cout<<sum(root);
     cout<<endl;
 
     return 0;

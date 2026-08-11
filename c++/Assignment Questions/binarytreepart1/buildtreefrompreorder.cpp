@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 #include <vector>
 using namespace std;
@@ -27,9 +28,99 @@ node* build(vector<int> nodes){
     currnode->right=build(nodes);
     return currnode;
 }
+void preorder(node* root){
+    if(root==NULL){
+        return;
+    }
+    cout<<root->data<<" ";
+    preorder(root->left);
+    preorder(root->right);
+}
+void inorder(node* root){
+    if(root==NULL){
+        return;
+    }
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+
+}
+void postorder(node* root){
+    if(root==NULL){
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->data<<" ";
+
+}
+void levelorder(node* root){
+    if(root==NULL){
+        return;
+    }
+    queue<node*> q;//node bana lo instead of int star* is very important
+    q.push(root);
+
+    while(!q.empty()){
+        node* curr=q.front();
+        q.pop();
+        if(curr->left!=NULL){
+            q.push(curr->left);
+        }
+        if(curr->right!=NULL){
+            q.push(curr->right);
+        }
+
+    }
+    
+}
+void levelorder1(node* root){
+    if(root==NULL){
+        return;
+    }
+    queue<node*> q;//node bana lo instead of int star* is very important
+    q.push(root);
+    q.push(NULL);//for*******
+    
+
+    while(!q.empty()){
+        node* curr=q.front();
+        q.pop();
+        if(curr==NULL){
+            cout<<endl;//agar curr null hai to endl charcatwrr daal do
+            //agar null character nikalneke baad queue khali ho gayi
+            if(q.empty()){
+                break;
+            }
+            q.push(NULL);//to track next line
+        }
+        else{
+            if(curr->left!=NULL){
+                q.push(curr->left);
+            }
+            if(curr->right!=NULL){
+                q.push(curr->right);
+            }
+
+        }
+        
+        
+
+    }
+    
+}
 int main(){
     vector<int> nodes={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     node* root=build(nodes);
     cout<<"root = "<<root->data<<endl;
+    preorder(root);
+    cout<<endl;
+    inorder(root);
+    cout<<endl;
+    postorder(root);
+    cout<<endl;
+    levelorder(root);
+    cout<<endl;
+
     return 0;
 }

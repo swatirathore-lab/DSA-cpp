@@ -11,7 +11,7 @@ void maxlengthchainofpairs(vector<pair<int,int>> pairs){
     sort(pairs.begin(),pairs.end(),compare);//begin likhna hai end likhne hai remmeber
     int count=1;
     int currmax=pairs[0].second;
-    for(int i=0;i<n;i++){
+    for(int i=1;i<n;i++){
         if(pairs[i].first>currmax){
             count++;
             currmax=pairs[i].second;

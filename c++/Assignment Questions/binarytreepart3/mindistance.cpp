@@ -74,12 +74,36 @@ node* lca2(node* root,int n1,int n2){
     }
     return leftlca ==NULL ? rightlca:leftlca;
 }
+int dist(node* root,int n){
+    if(root==NULL){
+        return -1;
+    }
+    if(root->data==n){
+        return 0;
+    }
+    int leftdist=dist(root->left,n);
+    if(leftdist !=-1){
+        return leftdist+1;
+    }
+    int rightdist=dist(root->right,n);
+    if(rightdist !=-1){
+        return rightdist+1;
+    }
+    return -1;
+    
+  
+}
+int mindist(node* root,int n1,int n2){
+    node* lca=lca2(root,n1,n2);
+    int dist1=dist(lca,n1);
+    int dist2=dist(lca,n2);
+    return dist1+dist2;
 
+  
+}
 int main(){
     vector<int> nodes={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
     node* root=build(nodes);
     int n1=4,n2=5;
-    cout<<lowestcommonancestor(root,n1,n2)<<endl;//o(n)
-    cout<<lca2( root,n1,n2)->data;//important to add data*
-    
+    cout<<mindist(root,n1,n2);
 }

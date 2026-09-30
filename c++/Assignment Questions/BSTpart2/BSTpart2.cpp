@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 class node{
     public:
@@ -26,12 +27,13 @@ node* insert(node* root,int key){
         cout<<"duplicate value found"<<endl;
         return root;    
     }
+    return root;
 
 }
 node* buildbst(int arr[],int n){
     node* root=NULL;
     for(int i=0;i<n;i++){
-        insert(root,arr[i]);
+        root=insert(root,arr[i]);
     }
     return root;
 }
@@ -46,6 +48,32 @@ node* sortedarraytobalancedbst(int arr[],int start,int end){
     curr->right=sortedarraytobalancedbst(arr,mid+1,end);
     return curr;
 }
+//bst to balanced bst
+node* BSTfrombalancedsequence(vector<int> arr,int start,int end){
+    if(start>end){//bhul gayi thi kaise karte
+        return NULL;
+    }
+    int mid=start+(end-start)/2;//bhul gayi thi kaise karte
+    node* curr=new node(arr[mid]);
+    curr->left=BSTfrombalancedsequence(arr,start,mid-1);
+    curr->right=BSTfrombalancedsequence(arr,mid+1,end);
+    return curr;
+}
+void gettinginorder(node* root,vector<int>& nodes){//& jaruri hai warna copy ban rahi ye galti tumne repeteadly ki hai
+    if(root==NULL){
+        return;
+    }
+    gettinginorder(root->left,nodes);
+    cout<<root->data<<" ";
+    nodes.push_back(root->data);//ye bhi bhul gaye the aap nodes me data push karna
+    gettinginorder(root->right,nodes);
+}
+node* balancedbst(node* root){
+    vector<int> nodes;
+    gettinginorder(root,nodes);
+    return BSTfrombalancedsequence(nodes,0,nodes.size()-1);//please rememeber how to pass when there is vector and pleasee godsake return 
+}
+
 void inorder(node* root){
     if(root==NULL){
         return;
@@ -71,6 +99,18 @@ int main(){
     cout<<endl;
     preorder(root);
     cout<<endl;
+    node* root1=new node(6);
+    root1->left=new node(5);
+    root1->left->left=new node(4);
+    root1->left->left->left=new node(3);
+    root1->right=new node(7);
+    root1->right->right=new node(8);
+    root1->right->right->right=new node(9);
+    root1=balancedbst(root1);
+    cout<<endl;
+    preorder(root1);
+    cout<<endl;
+
     return 0;
 }
 

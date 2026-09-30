@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <climits>
 using namespace std;
 class node{
     public:
@@ -13,6 +14,7 @@ class node{
 
 };
 node* insert(node* root,int key){
+
     if(root==NULL){
         root=new node(key);
         return root;
@@ -49,7 +51,7 @@ node* sortedarraytobalancedbst(int arr[],int start,int end){
     return curr;
 }
 //bst to balanced bst
-node* BSTfrombalancedsequence(vector<int> arr,int start,int end){
+node* BSTfrombalancedsequence(vector<int>& arr,int start,int end){
     if(start>end){//bhul gayi thi kaise karte
         return NULL;
     }
@@ -73,7 +75,42 @@ node* balancedbst(node* root){
     gettinginorder(root,nodes);
     return BSTfrombalancedsequence(nodes,0,nodes.size()-1);//please rememeber how to pass when there is vector and pleasee godsake return 
 }
+//largest height of bst
+class info{
+    public:
+    int isbst;
+    int min;
+    int max;
+    int sz;
+    info(int isbst,int min ,int max,int sz){
+        this->isbst=isbst;
+        this->min=min;
+        this->max=max;
+        this->sz=sz;
+    }
+};
+static int maxsize;
+info* largestbst(node* root){
+    if(root==NULL){
+        return new info(true,INT_MAX,INT_MIN,0);///*** */
+    }
+    if(root->left==NULL && root->right==NULL){
+        maxsize=max(maxsize,1);
+        return new info(true,root->data,root->data,1);
+    }
+    info* leftinfo=largestbst(root->left);//left right me directly nahi recursion se hi ja sakte
+    info* rightinfo=largestbst(root->right);
+    int currmin=min(root->data,min(leftinfo->min,rightinfo->min));
+    int currmax=max(root->data,max(leftinfo->max,rightinfo->max));//left right ke max ko hi acess karna
+    int currsz=leftinfo->sz+rightinfo->sz+1;
+    if(leftinfo->isbst && rightinfo->isbst && root->data>leftinfo->max && root->data<rightinfo->min){//root ka data left ke maximum se bada hona chahiye aur right ke maximum se
+        maxsize=max(currsz,maxsize);
+        return new info(true,currmin,currmax,currsz);
 
+    }
+    return new info(false,currmin,currmax,currsz);
+}
+//for first one
 void inorder(node* root){
     if(root==NULL){
         return;
@@ -110,7 +147,8 @@ int main(){
     cout<<endl;
     preorder(root1);
     cout<<endl;
-
+    info* answer = largestbst(root1);
+    cout << "Largest BST size = " << answer->sz << endl;
     return 0;
 }
 

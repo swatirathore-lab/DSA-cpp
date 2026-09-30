@@ -120,15 +120,14 @@ Node* roottoleaf(Node* root){
     pathhelper(root,path);
     return root;
 }
-Node* validatehelper(Node* root,Node* min,Node* max){
+bool validatehelper(Node* root,Node* min,Node* max){
     if(root==NULL){
-        return NULL;
+        return true;
     }
     if((min!=NULL && root->data<=min->data) || (max!=NULL && root->data>=max->data)){
-        return NULL;
+        return false;
     }
-    validatehelper(root->left,min,root);
-    validatehelper(root->right,root,max);
+    return validatehelper(root->left,min,root) && validatehelper(root->right,root,max);
 }
 //validate bst
 bool validatebst(Node* root){

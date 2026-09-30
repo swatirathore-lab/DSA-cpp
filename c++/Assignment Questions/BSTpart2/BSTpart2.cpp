@@ -110,6 +110,46 @@ info* largestbst(node* root){
     }
     return new info(false,currmin,currmax,currsz);
 }
+//merge two bsts
+node* mergeBSTs(node* root3, node* root4) {
+
+    vector<int> nodes1;
+    vector<int> nodes2;
+    vector<int> merged;
+
+    // Get inorder of both BSTs
+    gettinginorder(root3, nodes1);
+    gettinginorder(root4, nodes2);
+
+    int i = 0;
+    int j = 0;
+
+    // Merge two sorted vectors
+    while (i < nodes1.size() && j < nodes2.size()) {
+
+        if (nodes1[i] < nodes2[j]) {
+            merged.push_back(nodes1[i++]);
+        }
+        else {
+            merged.push_back(nodes2[j++]);
+        }
+    }
+
+    // Remaining elements of nodes1
+    while (i < nodes1.size()) {
+        merged.push_back(nodes1[i++]);
+    }
+
+    // Remaining elements of nodes2
+    while (j < nodes2.size()) {
+        merged.push_back(nodes2[j++]);
+    }
+
+
+    // Create balanced BST from merged array
+    return BSTfrombalancedsequence(merged, 0, merged.size() - 1);
+}
+
 //for first one
 void inorder(node* root){
     if(root==NULL){
@@ -149,6 +189,26 @@ int main(){
     cout<<endl;
     info* answer = largestbst(root1);
     cout << "Largest BST size = " << answer->sz << endl;
+    // BST 1
+    node* root3 = new node(2);
+    root3->left = new node(1);
+    root3->right = new node(4);
+
+
+    // BST 2
+    node* root4 = new node(9);
+    root4->left = new node(3);
+    root4->right = new node(12);
+
+
+    // Merge BSTs
+    node* root5 = mergeBSTs(root3, root4);
+
+
+    // Print merged BST
+    cout << "Inorder of merged BST: ";
+    inorder(root5);
+
     return 0;
 }
 
